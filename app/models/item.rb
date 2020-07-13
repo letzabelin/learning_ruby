@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Item < ApplicationRecord
   validates :price, numericality: { greater_than: 0, allow_nil: true }
-  validates :name, :description, presence: true
+  validates :name, presence: true
 
   after_initialize { p 'initialize custom' }
   after_save { p 'save custom' }
