@@ -6,13 +6,12 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all
-    render body: @items.map { |item| "#{item.name} : #{item.price}" }.join("\n")
   end
 
   def create
     item = Item.create(items_params)
     if item.persisted?
-      render json: item.name, status: :created
+      redirect_to items_path
     else
       render json: item.errors, status: :unprocessable_entity
     end
@@ -20,13 +19,39 @@ class ItemsController < ApplicationController
 
   def new; end
 
-  def show; end
+  def show
+    @item = Item.where(id: params[:id]).first
 
-  def edit; end
+    if @item
+      render 'show'
+    else
+      render body: 'Page not found', status: 404
+    end
+  end
 
-  def update; end
+  def edit
+    render body: 'Page not found', status: 404 unless (@item = Item.where(id: params[:id]).first)
+  end
 
-  def destroy; end
+  def update
+    item = Item.where(id: params[:id]).first
+
+    if item.update(items_params)
+      redirect_to item_path
+    else
+      render json: item.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    item = Item.where(id: params[:id]).first.destroy
+
+    if item.destroyed?
+      redirect_to items_path
+    else
+      render json: items.errors, status: :unprocessable_entity
+    end
+  end
 
   private
 

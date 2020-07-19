@@ -1,13 +1,22 @@
-<%# <% @items.each do |item| %1> %>
-<%#   <ul> %>
-<%#     <li> %>
-<%#       <%= item.name %1> %>
-<%#     </li> %>
-<%#     <li> %>
-<%#       <%= item.price %1> %>
-<%#     </li> %>
-<%#     <li> %>
-<%#       <%= item.description %1> %> 
-<%#     </li> %>
-<%#   </ul> %>
-<%# <% end %1> %>
+<h2 style="margin: 0 auto">All items</h2>
+
+<% @items.each do |item| %>
+  <ul>
+    <li>
+      <%= link_to item.name, item_path(item) %>
+    </li>
+    <li>
+      <%= item.price %>
+    </li>
+    <li>
+      <%= item.description %> 
+    </li>
+    <li>
+      <%= button_to 'Delete', item_path(item), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </li>
+  </ul>
+<% end %>
+
+<br>
+
+<%= link_to 'New item', new_item_path %>
