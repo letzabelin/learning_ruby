@@ -8,3 +8,7 @@
   <li>Weight: <%= @item.weight %></li>
 </ul>
 
+
+<%= link_to "Edit item", edit_item_path %><br>
+<%= button_to "Delete item", item_path(@item), method: :delete %><br>
+<%= link_to 'Main page', items_path %>
