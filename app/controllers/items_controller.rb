@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
-  layout false
   skip_before_action :verify_authenticity_token
   before_action :find_item, only: %i[show edit update destroy upvote]
   before_action :admin?, only: :edit
@@ -9,6 +8,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all
+    @items = @items.includes(:image)
   end
 
   def create
@@ -61,12 +61,6 @@ class ItemsController < ApplicationController
   def find_item
     @item = Item.where(id: params[:id]).first
     render_404 unless @item
-  end
-
-  def admin?
-    true
-    # render_403 unless params[:admin]
-    # render json: 'Access denied', status: :forbidden unless params[:admin]
   end
 
   def show_info
