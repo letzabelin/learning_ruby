@@ -7,20 +7,24 @@ class ItemsController < ApplicationController
   after_action :show_info, only: :index
 
   def index
-    @items = Item.all
+    @items = Item.all.order(:id)
     @items = @items.includes(:image)
   end
 
   def create
-    item = Item.create(items_params)
-    if item.persisted?
+    @item = Item.create(items_params)
+    if @item.persisted?
+      flash[:success] = 'Item was created successfully'
       redirect_to items_path
     else
-      render json: item.errors, status: :unprocessable_entity
+      flash.now[:error] = 'Please fill all fields correctly'
+      render 'new'
     end
   end
 
-  def new; end
+  def new
+    @item = Item.new
+  end
 
   def show; end
 
@@ -28,16 +32,20 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(items_params)
+      flash[:success] = 'Item was updated successfully'
       redirect_to item_path
     else
+      flash.now[:error] = 'Please fill all fields correctly'
       render json: item.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
     if @item.destroy.destroyed?
+      flash[:success] = 'Item was destroyed'
       redirect_to items_path
     else
+      flash.now[:error] = 'Item wasn\'t destroyed'
       render json: items.errors, status: :unprocessable_entity
     end
   end
@@ -55,7 +63,7 @@ class ItemsController < ApplicationController
   private
 
   def items_params
-    params.permit(:name, :price, :description)
+    params.require(:item).permit(:name, :price, :description)
   end
 
   def find_item
