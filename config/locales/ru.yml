@@ -29,6 +29,16 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
-  item:
-    description: "Description"
+ru:
+  item: 
+    description: "Описание"
+
+  activerecord:
+    models:
+      item: 'Товар'
+    attributes:
+      item:
+        price: 'Цена'
+        name: 'Название'
+        description: 'Описание'
+        weight: 'Вес'
