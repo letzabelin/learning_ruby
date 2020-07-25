@@ -9,6 +9,6 @@ Bundler.require(*Rails.groups)
 module LearningRuby
   class Application < Rails::Application
     config.load_defaults 6.0
-    config.i18n.default_locale = :ru
+    config.i18n.default_locale = :en
   end
 end

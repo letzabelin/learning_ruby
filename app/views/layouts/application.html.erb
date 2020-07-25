@@ -11,9 +11,13 @@
   </head>
 
   <body>
-    <h2 style="color: red">User Panel</h2>
-    <p style="color: red"><%= flash[:error] %></p>
-    <p style="color: green"><%= flash[:success] %></p>
-    <%= yield %>
+    <div class="jumbotron vertical-center bg-light">
+      <div class="container">
+        <h2 style="color: #b00100">User Panel</h2>
+        <p style="color: #b00100"><%= flash[:error] %></p>
+        <p style="color: darkgreen"><%= flash[:success] %></p>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
