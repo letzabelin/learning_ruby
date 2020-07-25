@@ -22,10 +22,13 @@ group :development, :test do
   gem 'pry'
   gem 'rails-controller-testing'
   gem 'rspec-rails'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
 end
 
 group :development do
   gem 'listen', '~> 3.2'
+  gem 'rubocop'
   gem 'shoulda-matchers'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

@@ -9,6 +9,6 @@ module ApplicationHelper
         "<a href='#{url}' target='_blank'>Link to info</a>"
       end
     end
-    str.html_safe
+    str.html_safe # rubocop:disable Rails/OutputSafety
   end
 end

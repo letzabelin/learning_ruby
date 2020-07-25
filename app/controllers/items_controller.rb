@@ -4,7 +4,6 @@ class ItemsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :find_item, only: %i[show edit update destroy upvote]
   before_action :admin?, only: :edit
-  after_action :show_info, only: :index
 
   def index
     @items = Item.all.order(:id).includes(:image)
@@ -41,7 +40,6 @@ class ItemsController < ApplicationController
 
   def destroy
     if @item.destroy.destroyed?
-      flash[:success] = 'Item was destroyed'
       render json: { success: true }
     else
       flash.now[:error] = 'Item wasn\'t destroyed'
@@ -50,7 +48,7 @@ class ItemsController < ApplicationController
   end
 
   def upvote
-    @item.increment! :votes_count
+    @item.increment! :votes_count # rubocop:disable Rails/SkipsModelValidations
     redirect_to items_path
   end
 
@@ -68,9 +66,5 @@ class ItemsController < ApplicationController
   def find_item
     @item = Item.where(id: params[:id]).first
     render_404 unless @item
-  end
-
-  def show_info
-    puts 'Index endpoint'
   end
 end
