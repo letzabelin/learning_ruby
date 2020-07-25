@@ -18,14 +18,14 @@
     </thead>
     <% @items.each do |item| %>
       <tbody>
-        <tr>
+        <tr data-item_id="<%= item.id %>">
           <td><%= item.id %></td>
           <td><%= link_to item.name.camelcase, item_path(item) %></td>
           <td><%= item.price %></td>
           <td><%= item.description %></td>
           <td><%= item.votes_count %> &nbsp; <%= link_to '+', upvote_item_path(item) %></td>
           <td><%= !item.image.nil? ? image_tag(item.image.file, width: '30px', height: '30px') : 'No img' %></td>
-          <td><%= button_to 'Delete', item_path(item), method: :delete, class: 'btn btn-danger' %></td>
+          <td><button class="deleteAction btn btn-danger">Delete</button></td>
         </tr>
       </tbody>
     <% end %>
