@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!
+  # skip_before_action :verify_authenticity_token
   before_action :find_item, only: %i[show edit update destroy upvote]
   before_action :admin?, only: :edit
 

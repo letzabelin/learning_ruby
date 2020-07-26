@@ -11,11 +11,15 @@
   </head>
 
   <body>
+
+    <%# devise %>
+      <%= render partial: 'include/auth/auth_header' %>
+    <%# devise %>
+
     <div class="jumbotron vertical-center bg-light">
       <div class="container">
         <h2 style="color: #b00100">User Panel</h2>
-        <p style="color: #b00100"><%= flash[:error] %></p>
-        <p style="color: darkgreen"><%= flash[:success] %></p>
+        <%= render partial: 'include/main/notification' %>
         <%= yield %>
       </div>
     </div>

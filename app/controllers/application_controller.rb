@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def admin?
-    render_403 unless params[:admin]
+    render_403 unless user_signed_in?
   end
 end
