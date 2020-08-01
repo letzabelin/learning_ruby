@@ -1,3 +1,7 @@
+init:
+	yarn install --check-files
+	bundle exec rake db:migrate
+
 test:
 	bundle exec rspec
 
