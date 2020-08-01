@@ -1,6 +1,6 @@
 ## Test & Lint
 ```
-  $ make test # for test
+  $ make test
   $ make lint
   $ make lint-fix-all
 ```
